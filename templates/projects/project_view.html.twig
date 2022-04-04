@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="d-flex justify-content-between align-baseline">
+    <h1 class="mt-5 text-uppercase"><span class="text-muted small">{{project.code }} | </span>{{ project.name }}</h1>
+    <div>
+      {% if project.isArchived == true %}
+        <div class="badge bg-danger mt-5 mx-5">Archivé</div>
+      {% else %}
+        <div class="badge bg-primary mt-5 mx-5">Non-Archivé</div>
+      {% endif %}
+    </div>
+  </div>
+  <p class="card-subtitle mb-2 text-muted">{{ project.startedAt|date("d/m/y", "Europe/Paris") }} - {{ project.endedAt|date("d/m/y", "Europe/Paris") }}{% if project.status %} | <span class="badge" style="background-color: {{ project.status.color }}">{{ project.status.name }}</span>{% endif %}</p>
+  <div>{{ project.description }}</div>
+
+  <h2 class="my-5">Teams</h2>
+  <div class="list-group">
+    <a href="{{ path('view_team', {"id": project.team.id }) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex justify-content-between">
+        <h5 class="mb-1">Project team</h5>
+      </div>
+      <p class="mb-1">{{ project.team.name}}</p>
+    </a>
+    <a href="{{ path('view_team', {"id": project.clientTeam.id }) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex justify-content-between">
+        <h5 class="mb-1">Customer team</h5>
+      </div>
+      <p class="mb-1">{{ project.clientTeam.name }}</p>
+    </a>
+  </div>
+
+  <h2 class="mt-5">Budget</h2>
+  <table class="table mt-5">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">Budget Initial</th>
+        <th scope="col">Montant consommé</th>
+        <th scope="col">Reste à faire</th>
+        <th scope="col">Atterissage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ project.budget.initialValue }}</td>
+        <td>{{ project.budget.consumedValue }}</td>
+        <td>{{ project.budget.remaining }}</td>
+        <td>{{ project.budget.landing }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 class="mt-5">Risk</h2>
+  <table class="table mt-5">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">Intitulé</th>
+        <th scope="col">Sévérité</th>
+        <th scope="col">Probabilité</th>
+        <th scope="col">Date d'identification</th>
+        <th scope="col">Date de résolution</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for risk in project.risks %}
+        <tr>
+          <td>{{ risk.name }}</td>
+          <td>{{ risk.severity }}</td>
+          <td>{{ risk.probability }}%</td>
+          <td>{{ risk.identificationDate|date("d/m/y", "Europe/Paris") }}</td>
+          <td>{{ risk.resolutionDate|date("d/m/y", "Europe/Paris") }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h2 class="mt-5">Faits marquants:</h2>
+  <div class="d-flex my-5 flex-wrap">
+    {% for highlight in project.highlight %}
+      <div class="card mx-5 my-5" style="width: calc(100%/4);">
+        <div class="card-body">
+          <h5 class="card-title">{{ highlight.name }}</h5>
+          <p class="text-muted">{{ highlight.date|date("d/m/y", "Europe/Paris") }}</p>
+          <p class="card-text">{{ highlight.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <div class="card-body">
+            <div class="card-text">
+              Jalon correspondant :
+              <p>{{ highlight.milestone.name }}</p>
+            </div>
+            {% if highlight.milestone.isMandatory == true %}
+              <p class="card-text">Etat: Obligatoire</p>
+            {% else %}
+              <p class="card-text">Etat: Optionnel</p>
+            {% endif %}
+          </div>
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

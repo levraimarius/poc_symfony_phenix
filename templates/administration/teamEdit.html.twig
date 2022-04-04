@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% set teamName = team.name %}
+{% block title %}Édition de l'événement {{ teamName }} - Administration{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Édition de <strong>{{ teamName }}</strong></h1>
+
+        {{ form_start(teamEditForm, {'attr': {'class': 'row'}}) }}
+            <div class="col-md-6">
+                {{ form_label(teamEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(teamEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(teamEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(teamEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(teamEditForm) }}
+    </div>
+{% endblock body %}

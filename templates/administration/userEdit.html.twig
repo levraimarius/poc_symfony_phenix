@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% set userName = user.firstName %}
+{% block title %}Édition de l'événement {{ userName }} - Administration{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Édition de <strong>{{ userName }}</strong></h1>
+
+        {{ form_start(userEditForm, {'attr': {'class': 'row'}}) }}
+            <div class="col-md-6">
+                {{ form_label(userEditForm.firstName) }}
+                <div class="input-group">
+                    {{ form_widget(userEditForm.firstName, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(userEditForm.firstName, {'attr': {'class': 'invalid-feedback'}}) }}
+
+                {{ form_label(userEditForm.lastName) }}
+                <div class="input-group">
+                    {{ form_widget(userEditForm.lastName, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(userEditForm.lastName, {'attr': {'class': 'invalid-feedback'}}) }}
+
+                {{ form_label(userEditForm.email) }}
+                <div class="input-group">
+                    {{ form_widget(userEditForm.email, {'attr': {'type': 'email', 'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(userEditForm.email, {'attr': {'class': 'invalid-feedback'}}) }}
+
+                {{ form_label(userEditForm.team) }}
+                <div class="input-group">
+                    {{ form_widget(userEditForm.team, {'attr': {'class': 'form-control custom-select'}}) }}
+                </div>
+                {{ form_errors(userEditForm.team, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(userEditForm.roles) }}
+                <div class="input-group">
+                    {{ form_widget(userEditForm.roles) }}
+                </div>
+                {{ form_errors(userEditForm.roles, {'attr': {'class': 'invalid-feedback'}}) }}
+            {{ form_widget(userEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(userEditForm) }}
+    </div>
+{% endblock body %}

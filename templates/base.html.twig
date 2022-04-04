@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %} - Phenix Project</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <script src="https://unpkg.com/feather-icons"></script>
+    </head>
+    
+    <body class="d-flex flex-column h-100">
+        {% set route_name = app.request.attributes.get('_route') %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('app_homepage') }}"><img src="{{ asset('img/logo.png') }}" width="50"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_homepage') }}"><i data-feather="home" width="15"></i> Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_projects') }}"><i data-feather="book-open" width="15"></i> Projects</a>
+                        </li>
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_administration') }}"><i data-feather="lock" width="15"></i> Administration</a>
+                        </li>
+                        {% endif %}
+
+                        {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_dashboard')  }}"><i data-feather="bookmark" width="15"></i> Dashboard</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}"><i data-feather="log-out" width="15"></i> Sign Out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}"><i data-feather="log-in" width="15"></i> Sign In</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}"><i data-feather="edit-2" width="15"></i> Sign Up</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% block body %}{% endblock %}
+
+        <script>
+            feather.replace()
+        </script>
+    </body>
+</html>

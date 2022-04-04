@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TeamController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>{{ team.name }}</h1>
+    <h2>Responsable: {{ team.leader.firstName }} {{ team.leader.lastName }}</h2>
+
+    <ul class="list-group list-group-flush">
+        {% if team.members is empty %}
+            <p>Oups, il semblerait qu'il n'y ai aucun membre dans cette équipe pour le moment.</p>
+        {% else %}
+            {% for member in team.members %}
+                <li class="list-group-item">{{ member.firstName }} {{ member.lastName }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    
+</div>
+{% endblock %}

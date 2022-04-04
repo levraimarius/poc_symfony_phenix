@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row my-5 g-3">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Users</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('app_users_administration') }}" class="btn btn-primary">Manage users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Teams</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('app_teams_administration') }}" class="btn btn-primary">Manage teams</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Status</h5>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Projects</h5>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

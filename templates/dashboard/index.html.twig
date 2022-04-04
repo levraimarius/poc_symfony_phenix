@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome to your Dashboard {{ app.user.lastname }}{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="my-5">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="latest-projects-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">My latest projects</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="team-latest-projects-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">My team's latest projects</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="projects-with-risks-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Projects with risks</button>
+				</li>
+			</ul>
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="latest-projects-tab">
+                    <div class="row">
+					    {% for myProject in myProjects %}
+                        <div class="col-sm-6">
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    <h4>{{myProject.code }} - {{ myProject.name }}</h4>
+                                    <p>
+                                        {{ myProject.startedAt|date("d/m/y", "Europe/Paris") }} - {{ myProject.endedAt|date("d/m/y", "Europe/Paris") }}
+                                        {% if myProject.status %} | <span class="badge bg-success">{{ myProject.status.name }}</span>{% endif %}
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">{{ myProject.description}}</p>
+                                    <a href="{{ path('view_project', {"id": myProject.id }) }}" class="btn btn-primary btn-sm">See the project</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('view_project', {"id": myProject.id }) }}" class="btn btn-success btn-sm">Modify the project</a>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <p>Project team : {{ myProject.team.name }}</p>
+                                    <p>Customer team : {{ myProject.clientTeam.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+				</div>
+
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="team-latest-projects-tab">
+                    <div class="row">
+					    {% for myTeamProject in myTeamProjects %}
+                        <div class="col-sm-6">
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    <h4>{{myTeamProject.code }} - {{ myTeamProject.name }}</h4>
+                                    <p>
+                                        {{ myTeamProject.startedAt|date("d/m/y", "Europe/Paris") }} - {{ myTeamProject.endedAt|date("d/m/y", "Europe/Paris") }}
+                                        {% if myTeamProject.status %} | <span class="badge bg-success">{{ myTeamProject.status.name }}</span>{% endif %}
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">{{ myTeamProject.description}}</p>
+                                    <a href="{{ path('view_project', {"id": myTeamProject.id }) }}" class="btn btn-primary btn-sm">See the project</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('view_project', {"id": myTeamProject.id }) }}" class="btn btn-success btn-sm">Modify the project</a>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <p>Project team : {{ myTeamProject.team.name }}</p>
+                                    <p>Customer team : {{ myTeamProject.clientTeam.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="projects-with-risks-tab">
+                    <div class="row">
+					    {% for projectWithRisks in projectsWithRisks %}
+                        <div class="col-sm-6">
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    <h4>{{ projectWithRisks.project.code }} - {{ projectWithRisks.project.name }} - {{ projectWithRisks.name }}</h4>
+                                    <p>
+                                        {{ projectWithRisks.project.startedAt|date("d/m/y", "Europe/Paris") }} - {{ projectWithRisks.project.endedAt|date("d/m/y", "Europe/Paris") }}
+                                        {% if projectWithRisks.project.status %} | <span class="badge bg-success">{{ projectWithRisks.project.status.name }}</span>{% endif %}
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">{{ projectWithRisks.project.description}}</p>
+                                    <a href="{{ path('view_project', {"id": projectWithRisks.project.id }) }}" class="btn btn-primary btn-sm">See the project</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('view_project', {"id": projectWithRisks.project.id }) }}" class="btn btn-success btn-sm">Modify the project</a>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <p>Project team : {{ projectWithRisks.project.team.name }}</p>
+                                    <p>Customer team : {{ projectWithRisks.project.clientTeam.name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

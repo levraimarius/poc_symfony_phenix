@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-5">Teams list</h1>
+    <div class="row my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Team name</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <th scope="row">{{ team.id }}</th>
+                    <td>{{ team.name }}</td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('app_team_edit', {"id": team.id}) }}"><i data-feather="edit" width="15"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('app_team_delete', {"id": team.id}) }}" onclick="return confirm('Warning, this will delete the team! (This action is irreversible)')"><i data-feather="trash-2" width="15"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
