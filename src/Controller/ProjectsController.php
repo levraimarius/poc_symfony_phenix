@@ -21,7 +21,7 @@ class ProjectsController extends AbstractController
     #[Route('/projects/{id}', name: 'view_project')]
     public function view(Project $project): Response
     {
-        return $this->render('projects/project_view.html.twig', [
+        return $this->render('projects/projectView.html.twig', [
             'project' => $project,
         ]);
     }

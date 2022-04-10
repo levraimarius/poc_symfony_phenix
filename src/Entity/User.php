@@ -33,6 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'members')]
+    #[ORM\JoinColumn(nullable: false)]
     private $team;
 
     public function getId(): ?int
