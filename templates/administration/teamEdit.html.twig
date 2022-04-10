@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 {% set teamName = team.name %}
-{% block title %}Édition de l'événement {{ teamName }} - Administration{% endblock %}
+{% block title %}Edit {{ teamName }}{% endblock %}
 
 {% block body %}
     <div class="container my-5">
-        <h1 class="h3 mb-3 font-weight-normal">Édition de <strong>{{ teamName }}</strong></h1>
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ teamName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_teams_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
 
-        {{ form_start(teamEditForm, {'attr': {'class': 'row'}}) }}
+        {{ form_start(teamEditForm, {'attr': {'class': 'row my-5'}}) }}
             <div class="col-md-6">
                 {{ form_label(teamEditForm.name) }}
                 <div class="input-group">

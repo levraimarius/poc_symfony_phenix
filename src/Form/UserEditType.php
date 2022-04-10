@@ -27,8 +27,7 @@ class UserEditType extends AbstractType
                 'choices' => ['Administrator' => 'ROLE_ADMIN'],
                 'expanded' => true,
                 'multiple' => true,
-            ]
-        )
+            ])
             ->add('firstName', TextType::class, [
                 'label' => 'First Name',
                 'required' => true,

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% set statusName = status.name %}
+{% block title %}Edit {{ statusName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ statusName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_status_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(statusEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(statusEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(statusEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(statusEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(statusEditForm.value) }}
+                <div class="input-group">
+                    {{ form_widget(statusEditForm.value, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(statusEditForm.value, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(statusEditForm.slug) }}
+                <div class="input-group">
+                    {{ form_widget(statusEditForm.slug, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(statusEditForm.slug, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                <div class="col-1">
+                    {{ form_label(statusEditForm.color) }}
+                    <div class="input-group ">
+                        {{ form_widget(statusEditForm.color, {'attr': {'class': 'form-control form-control-color'}}) }}
+                    </div>
+                    {{ form_errors(statusEditForm.color, {'attr': {'class': 'invalid-feedback'}}) }}
+                </div>
+                
+            {{ form_widget(statusEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(statusEditForm) }}
+    </div>
+{% endblock body %}

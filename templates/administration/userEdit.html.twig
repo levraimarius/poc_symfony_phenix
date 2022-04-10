@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 {% set userName = user.firstName %}
-{% block title %}Édition de l'événement {{ userName }} - Administration{% endblock %}
+{% block title %}Edit {{ userName }}{% endblock %}
 
 {% block body %}
     <div class="container my-5">
-        <h1 class="h3 mb-3 font-weight-normal">Édition de <strong>{{ userName }}</strong></h1>
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ userName }}</strong></h1>
+        <a type="button" class="btn btn-primary" href="{{ path('app_users_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
 
-        {{ form_start(userEditForm, {'attr': {'class': 'row'}}) }}
+        {{ form_start(userEditForm, {'attr': {'class': 'row my-5'}}) }}
             <div class="col-md-6">
                 {{ form_label(userEditForm.firstName) }}
                 <div class="input-group">

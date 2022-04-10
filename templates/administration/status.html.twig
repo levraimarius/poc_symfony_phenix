@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-5">Status list</h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+    <div class="row my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status name</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Slug</th>
+                    <th scope="col">Color</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for status in status %}
+                <tr>
+                    <th scope="row">{{ status.id }}</th>
+                    <td>{{ status.name }}</td>
+                    <td>{{ status.value }}</td>
+                    <td>{{ status.slug }}</td>
+                    <td><span class="badge" style="background-color: {{ status.color }};">{{ status.color }}</span></td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('app_status_edit', {"id": status.id}) }}"><i data-feather="edit" width="15"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('app_status_delete', {"id": status.id}) }}" onclick="return confirm('Warning, this will delete the status! (This action is irreversible)')"><i data-feather="trash-2" width="15"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

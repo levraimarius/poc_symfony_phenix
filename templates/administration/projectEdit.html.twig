@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% set projectName = project.name %}
+{% block title %}Edit {{ projectName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ projectName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_projects_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(projectEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(projectEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.description) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.description, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.description, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.code) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.code, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.code, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.startedAt) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.startedAt, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.startedAt, {'attr': {'type': 'date', 'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.endedAt) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.endedAt, {'attr': {'type': 'date', 'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.endedAt, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.team) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.team, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.team, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.clientTeam) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.clientTeam, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.clientTeam, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.status) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.status, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.status, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.budget) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.budget, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.budget, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.portfolio) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.portfolio, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.portfolio, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(projectEditForm.isArchived) }}
+                <div class="input-group">
+                    {{ form_widget(projectEditForm.isArchived, {'attr': {'class': 'form-check'}}) }}
+                </div>
+                {{ form_errors(projectEditForm.isArchived, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(projectEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(projectEditForm) }}
+    </div>
+{% endblock body %}

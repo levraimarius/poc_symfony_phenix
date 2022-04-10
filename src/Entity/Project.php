@@ -34,10 +34,10 @@ class Project
     #[ORM\JoinColumn(nullable: false)]
     private $status;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime')]
     private $startedAt;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime')]
     private $endedAt;
 
     #[ORM\OneToOne(targetEntity: Budget::class, cascade: ['persist', 'remove'])]
@@ -139,24 +139,24 @@ class Project
         return $this;
     }
 
-    public function getStartedAt(): ?\DateTimeImmutable
+    public function getStartedAt(): ?\DateTime
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(\DateTimeImmutable $startedAt): self
+    public function setStartedAt(\DateTime $startedAt): self
     {
         $this->startedAt = $startedAt;
 
         return $this;
     }
 
-    public function getEndedAt(): ?\DateTimeImmutable
+    public function getEndedAt(): ?\DateTime
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTimeImmutable $endedAt): self
+    public function setEndedAt(\DateTime $endedAt): self
     {
         $this->endedAt = $endedAt;
 

@@ -26,8 +26,8 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             $project->setTeam($this->getReference('team'.$i));
             $project->setClientTeam($this->getReference('team'.$i));
             $project->setStatus($this->getReference('status'.$i));
-            $project->setStartedAt(\DateTimeImmutable::createFromFormat('Y-m-d',"2022-02-28"));
-            $project->setEndedAt(\DateTimeImmutable::createFromFormat('Y-m-d',"2022-03-28"));
+            $project->setStartedAt(\DateTime::createFromFormat('Y-m-d',"2022-02-28"));
+            $project->setEndedAt(\DateTime::createFromFormat('Y-m-d',"2022-03-28"));
             $project->setBudget($this->getReference('budget'.$i));
             $project->setIsArchived($isArchived[rand(0,1)]);
             $project->setPortfolio($this->getReference('portfolio'.$i));

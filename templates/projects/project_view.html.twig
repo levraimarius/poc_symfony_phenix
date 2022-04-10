@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projets{% endblock %}
+{% block title %}Projects{% endblock %}
 
 {% block body %}
 
 <div class="container">
   <div class="d-flex justify-content-between align-baseline">
-    <h1 class="mt-5 text-uppercase"><span class="text-muted small">{{project.code }} | </span>{{ project.name }}</h1>
+    <h1 class="mt-5 text-uppercase"><span class="text-muted small">{{project.code }} - </span>{{ project.name }}</h1>
     <div>
       {% if project.isArchived == true %}
-        <div class="badge bg-danger mt-5 mx-5">Archivé</div>
+        <div class="badge bg-danger mt-5 mx-5">Archived</div>
       {% else %}
-        <div class="badge bg-primary mt-5 mx-5">Non-Archivé</div>
+        <div class="badge bg-primary mt-5 mx-5">Not archived</div>
       {% endif %}
     </div>
   </div>
@@ -38,10 +38,10 @@
   <table class="table mt-5">
     <thead>
       <tr class="table-secondary">
-        <th scope="col">Budget Initial</th>
-        <th scope="col">Montant consommé</th>
-        <th scope="col">Reste à faire</th>
-        <th scope="col">Atterissage</th>
+        <th scope="col">Initial budget</th>
+        <th scope="col">Amount consumed</th>
+        <th scope="col">Still to do</th>
+        <th scope="col">Landing</th>
       </tr>
     </thead>
     <tbody>
@@ -57,11 +57,11 @@
   <table class="table mt-5">
     <thead>
       <tr class="table-secondary">
-        <th scope="col">Intitulé</th>
-        <th scope="col">Sévérité</th>
-        <th scope="col">Probabilité</th>
-        <th scope="col">Date d'identification</th>
-        <th scope="col">Date de résolution</th>
+        <th scope="col">Entitled</th>
+        <th scope="col">Severity</th>
+        <th scope="col">Probability</th>
+        <th scope="col">Identification date</th>
+        <th scope="col">Date of resolution</th>
       </tr>
     </thead>
     <tbody>
@@ -76,25 +76,25 @@
       {% endfor %}
     </tbody>
   </table>
-  <h2 class="mt-5">Faits marquants:</h2>
+  <h2 class="mt-5">Highlights:</h2>
   <div class="d-flex my-5 flex-wrap">
     {% for highlight in project.highlight %}
-      <div class="card mx-5 my-5" style="width: calc(100%/4);">
+      <div class="card" style="width: calc(100%/4);">
+        <div class="card-header">
+          <h5 class="card-title">{{ highlight.name }} - {{ highlight.date|date("d/m/y", "Europe/Paris") }}</h5>
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{ highlight.name }}</h5>
-          <p class="text-muted">{{ highlight.date|date("d/m/y", "Europe/Paris") }}</p>
           <p class="card-text">{{ highlight.description }}</p>
         </div>
         <ul class="list-group list-group-flush">
           <div class="card-body">
             <div class="card-text">
-              Jalon correspondant :
-              <p>{{ highlight.milestone.name }}</p>
+              <p>Corresponding milestone: {{ highlight.milestone.name }}</p>
             </div>
             {% if highlight.milestone.isMandatory == true %}
-              <p class="card-text">Etat: Obligatoire</p>
+              <p class="card-text">State: Mandatory</p>
             {% else %}
-              <p class="card-text">Etat: Optionnel</p>
+              <p class="card-text">State: Optionnal</p>
             {% endif %}
           </div>
         </ul>
