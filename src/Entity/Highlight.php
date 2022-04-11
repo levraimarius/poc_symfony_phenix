@@ -27,6 +27,7 @@ class Highlight
     private $milestone;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'highlight')]
+    #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $project;
 
     public function getId(): ?int

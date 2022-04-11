@@ -28,8 +28,11 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             $project->setStatus($this->getReference('status'.$i));
             $project->setStartedAt(\DateTime::createFromFormat('Y-m-d',"2022-02-28"));
             $project->setEndedAt(\DateTime::createFromFormat('Y-m-d',"2022-03-28"));
-            $project->setBudget($this->getReference('budget'.$i));
             $project->setIsArchived($isArchived[rand(0,1)]);
+            $project->setInitialValue(10000);
+            $project->setConsumedValue(0);
+            $project->setRemaining(10000);
+            $project->setLanding(10000);
             $project->setPortfolio($this->getReference('portfolio'.$i));
             $this->addReference('project'.$i, $project);
 
@@ -44,7 +47,6 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         return array(
             TeamFixtures::class,
             StatusFixtures::class,
-            BudgetFixtures::class,
             PortfolioFixtures::class
         );
     }

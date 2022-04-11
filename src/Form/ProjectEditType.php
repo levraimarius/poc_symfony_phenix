@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\{Project, Team, Status, Budget, Portfolio};
+use App\Entity\{Project, Team, Status, Portfolio};
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,12 +69,6 @@ class ProjectEditType extends AbstractType
                 'choice_label' => 'name',
                 'required' => true,
             ])
-            ->add('budget', EntityType::class, [
-                'label' => 'Budget',
-                'class' => Budget::class,
-                'choice_label' => 'initial_value',
-                'required' => true,
-            ])
             ->add('portfolio', EntityType::class, [
                 'label' => 'Portfolio',
                 'class' => Portfolio::class,
@@ -82,6 +76,34 @@ class ProjectEditType extends AbstractType
                 'required' => true,
             ])
             ->add('isArchived')
+            ->add('initialValue', NumberType::class, [
+                'label' => 'Initial budget',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control',
+                )
+            ])
+            ->add('consumedValue', NumberType::class, [
+                'label' => 'Consumed budget',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control',
+                )
+            ])
+            ->add('remaining', NumberType::class, [
+                'label' => 'Remaining',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control',
+                )
+            ])
+            ->add('landing', NumberType::class, [
+                'label' => 'Landing',
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control',
+                )
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Change user information',
                 'attr'   =>  array(

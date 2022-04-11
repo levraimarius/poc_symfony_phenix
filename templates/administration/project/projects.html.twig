@@ -21,6 +21,10 @@
                     <th scope="col">Budget</th>
                     <th scope="col">Portfolio</th>
                     <th scope="col">Is archived</th>
+                    <th scope="col">Initial budget</th>
+                    <th scope="col">Consumed budget</th>
+                    <th scope="col">Remaining</th>
+                    <th scope="col">Landing</th>
                 </tr>
             </thead>
             
@@ -33,11 +37,14 @@
                     <td>{{ project.code }}</td>
                     <td>{{ project.startedAt|date("d F Y", "Europe/Paris") }} - {{ project.endedAt|date("d F Y", "Europe/Paris") }}</td>
                     <td>{{ project.team.name }}</td>
-                    <td>{{ project.clientTeam.name }}</td>
+                    <td>{{ project.clientTeam.name|default('Not defined') }}</td>
                     <td>{{ project.status.name }}</td>
-                    <td>{{ project.budget.initialValue }}</td>
-                    <td>{{ project.portfolio.name }}</td>
+                    <td>{{ project.portfolio.name|default('Not defined') }}</td>
                     <td>{{ project.isArchived }}</td>
+                    <td>{{ project.initialValue }}</td>
+                    <td>{{ project.consumedValue }}</td>
+                    <td>{{ project.remaining }}</td>
+                    <td>{{ project.landing }}</td>
                     <td>
                         <a type="button" class="btn btn-primary" href="{{ path('app_project_edit', {"id": project.id}) }}"><i data-feather="edit" width="15"></i></a>
                     </td>

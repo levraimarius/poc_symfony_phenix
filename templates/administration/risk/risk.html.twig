@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-5">risks list</h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+    <div class="row my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>Risk name</th>
+                    <th>Associate project</th>
+                    <th>Identification and resolution date</th>
+                    <th>Severity</th>
+                    <th>Probability</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for risk in risks %}
+                <tr>
+                    <th scope="row">{{ risk.id }}</th>
+                    <td>{{ risk.name }}</td>
+                    <td>{{ risk.project.name|default('Not defined') }}</td>
+                    <td>{{ risk.identificationDate|date("d F Y", "Europe/Paris") }} - {{ risk.resolutionDate|date("d F Y", "Europe/Paris") }}</td>
+                    <td>{{ risk.severity }}</td>
+                    <td>{{ risk.probability }}</td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('app_risk_edit', {"id": risk.id}) }}"><i data-feather="edit" width="15"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('app_risk_delete', {"id": risk.id}) }}" onclick="return confirm('Warning, this will delete the risk! (This action is irreversible)')"><i data-feather="trash-2" width="15"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% set riskName = risk.name %}
+{% block title %}Edit {{ riskName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ riskName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_risk_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(riskEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(riskEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(riskEditForm.identificationDate) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.identificationDate, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.identificationDate, {'attr': {'type': 'date', 'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(riskEditForm.resolutionDate) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.resolutionDate, {'attr': {'type': 'date', 'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.resolutionDate, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(riskEditForm.severity) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.severity, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.severity, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(riskEditForm.probability) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.probability, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.probability, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(riskEditForm.project) }}
+                <div class="input-group">
+                    {{ form_widget(riskEditForm.project, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(riskEditForm.project, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(riskEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(riskEditForm) }}
+    </div>
+{% endblock body %}

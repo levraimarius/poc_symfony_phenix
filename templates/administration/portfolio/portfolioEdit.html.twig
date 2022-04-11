@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% set portfolioName = portfolio.name %}
+{% block title %}Edit {{ portfolioName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ portfolioName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_portfolio_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(portfolioEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(portfolioEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(portfolioEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(portfolioEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(portfolioEditForm.supervisor) }}
+                <div class="input-group">
+                    {{ form_widget(portfolioEditForm.supervisor, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(portfolioEditForm.supervisor, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(portfolioEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(portfolioEditForm) }}
+    </div>
+{% endblock body %}

@@ -25,13 +25,15 @@ class Project
     private $code;
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(name: 'team_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $team;
 
     #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(name: 'team_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $clientTeam;
 
     #[ORM\ManyToOne(targetEntity: Status::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $status;
 
     #[ORM\Column(type: 'datetime')]
@@ -39,10 +41,6 @@ class Project
 
     #[ORM\Column(type: 'datetime')]
     private $endedAt;
-
-    #[ORM\OneToOne(targetEntity: Budget::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $budget;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Highlight::class)]
     private $highlight;
@@ -52,6 +50,18 @@ class Project
 
     #[ORM\Column(type: 'boolean')]
     private $isArchived;
+
+    #[ORM\Column(type: 'float')]
+    private $initialValue;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $consumedValue;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $remaining;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $landing;
 
     #[ORM\ManyToOne(targetEntity: Portfolio::class, inversedBy: 'projects')]
     private $portfolio;
@@ -163,18 +173,6 @@ class Project
         return $this;
     }
 
-    public function getBudget(): ?Budget
-    {
-        return $this->budget;
-    }
-
-    public function setBudget(Budget $budget): self
-    {
-        $this->budget = $budget;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Highlight>
      */
@@ -243,6 +241,54 @@ class Project
     public function setIsArchived(bool $isArchived): self
     {
         $this->isArchived = $isArchived;
+
+        return $this;
+    }
+
+    public function getInitialValue(): ?float
+    {
+        return $this->initialValue;
+    }
+
+    public function setInitialValue(float $initialValue): self
+    {
+        $this->initialValue = $initialValue;
+
+        return $this;
+    }
+
+    public function getConsumedValue(): ?float
+    {
+        return $this->consumedValue;
+    }
+
+    public function setConsumedValue(?float $consumedValue): self
+    {
+        $this->consumedValue = $consumedValue;
+
+        return $this;
+    }
+
+    public function getRemaining(): ?float
+    {
+        return $this->remaining;
+    }
+
+    public function setRemaining(?float $remaining): self
+    {
+        $this->remaining = $remaining;
+
+        return $this;
+    }
+
+    public function getLanding(): ?float
+    {
+        return $this->landing;
+    }
+
+    public function setLanding(?float $landing): self
+    {
+        $this->landing = $landing;
 
         return $this;
     }

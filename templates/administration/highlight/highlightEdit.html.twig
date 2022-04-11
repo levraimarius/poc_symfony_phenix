@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% set highlightName = highlight.name %}
+{% block title %}Edit {{ highlightName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ highlightName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_highlight_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(highlightEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(highlightEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(highlightEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(highlightEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(highlightEditForm.description) }}
+                <div class="input-group">
+                    {{ form_widget(highlightEditForm.description, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(highlightEditForm.description, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(highlightEditForm.milestone) }}
+                <div class="input-group">
+                    {{ form_widget(highlightEditForm.milestone, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(highlightEditForm.milestone, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(highlightEditForm.project) }}
+                <div class="input-group">
+                    {{ form_widget(highlightEditForm.project, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(highlightEditForm.project, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(highlightEditForm.date) }}
+                <div class="input-group">
+                    {{ form_widget(highlightEditForm.date, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(highlightEditForm.date, {'attr': {'type': 'date', 'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(highlightEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(highlightEditForm) }}
+    </div>
+{% endblock body %}

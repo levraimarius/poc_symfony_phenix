@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-5">Portfolio's list</h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+    <div class="row my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>Portfolio name</th>
+                    <th>Supervisor name</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for portfolio in portfolios %}
+                <tr>
+                    <th scope="row">{{ portfolio.id }}</th>
+                    <td>{{ portfolio.name }}</td>
+                    <td>{{ portfolio.supervisor.firstName|default('Not defined') }} {{ portfolio.supervisor.lastName|default('Not defined') }}</td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('app_portfolio_edit', {"id": portfolio.id}) }}"><i data-feather="edit" width="15"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('app_portfolio_delete', {"id": portfolio.id}) }}" onclick="return confirm('Warning, this will delete the portfolio! (This action is irreversible)')"><i data-feather="trash-2" width="15"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

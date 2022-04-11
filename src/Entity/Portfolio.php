@@ -19,9 +19,11 @@ class Portfolio
     private $name;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $supervisor;
 
     #[ORM\OneToMany(mappedBy: 'portfolio', targetEntity: Project::class)]
+    #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $projects;
 
     public function __construct()

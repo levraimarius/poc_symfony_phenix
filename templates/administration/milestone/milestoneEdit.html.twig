@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% set milestoneName = milestone.name %}
+{% block title %}Edit {{ milestoneName }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="h3 mb-3 font-weight-normal">Edit <strong>{{ milestoneName }}</strong></h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_milestone_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+
+        {{ form_start(milestoneEditForm, {'attr': {'class': 'row my-5'}}) }}
+            <div class="col-md-6">
+                {{ form_label(milestoneEditForm.name) }}
+                <div class="input-group">
+                    {{ form_widget(milestoneEditForm.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(milestoneEditForm.name, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(milestoneEditForm.value) }}
+                <div class="input-group">
+                    {{ form_widget(milestoneEditForm.value, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_errors(milestoneEditForm.value, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+                {{ form_label(milestoneEditForm.isMandatory) }}
+                <div class="input-group">
+                    {{ form_widget(milestoneEditForm.isMandatory, {'attr': {'class': 'form-select'}}) }}
+                </div>
+                {{ form_errors(milestoneEditForm.isMandatory, {'attr': {'class': 'invalid-feedback'}}) }}
+                
+            {{ form_widget(milestoneEditForm.submit, { 'label': 'Change information' }) }}
+            </div>
+        {{ form_end(milestoneEditForm) }}
+    </div>
+{% endblock body %}

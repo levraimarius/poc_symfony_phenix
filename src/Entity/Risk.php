@@ -29,6 +29,7 @@ class Risk
     private $probability;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'risks')]
+    #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private $project;
 
     public function getId(): ?int

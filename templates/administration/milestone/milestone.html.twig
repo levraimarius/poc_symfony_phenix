@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="mt-5">Milestone's list</h1>
+    <a type="button" class="btn btn-primary" href="{{ path('app_administration') }}"><i data-feather="arrow-left" width="15"></i> Return</a>
+    <div class="row my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th>Milestone name</th>
+                    <th>Value</th>
+                    <th>Is mandatory</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for milestone in milestones %}
+                <tr>
+                    <th scope="row">{{ milestone.id }}</th>
+                    <td>{{ milestone.name }}</td>
+                    <td>{{ milestone.value }}</td>
+                    <td>{% if milestone.isMandatory == 1 %}Yes{% else %}No{% endif %}</td>
+                    <td>
+                        <a type="button" class="btn btn-primary" href="{{ path('app_milestone_edit', {"id": milestone.id}) }}"><i data-feather="edit" width="15"></i></a>
+                        <a type="button" class="btn btn-danger" href="{{ path('app_milestone_delete', {"id": milestone.id}) }}" onclick="return confirm('Warning, this will delete the milestone! (This action is irreversible)')"><i data-feather="trash-2" width="15"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
